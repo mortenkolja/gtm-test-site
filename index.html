@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTM Testside</title>
+    <!-- Google Tag Manager -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GTM-5MXBJBZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+<body>
+    <h1>Velkommen til min GTM testside</h1>
+    <button id="test-knap">Klik mig</button>
+
+    <script>
+        document.getElementById("test-knap").addEventListener("click", function() {
+            dataLayer.push({'event': 'knapKlik'});
+            alert("Event sendt til GTM!");
+        });
+    </script>
+</body>
+</html>
