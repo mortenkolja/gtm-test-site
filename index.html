@@ -12,7 +12,7 @@
     'https://www.googletagmanager.com/gtm.js?id=GTM-5MXBJBZS'+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-5MXBJBZS');</script>
     <!-- End Google Tag Manager -->
-    
+
 </head>
 <body>
 
@@ -22,15 +22,53 @@
     <!-- End Google Tag Manager -->
 
     <h1>Velkommen til min GTM Testside</h1>
-    <p>Dette er en simpel testside til at lære tracking via Google Tag Manager og Google Analytics.</p>
-    
+    <p>Dette er en testside med forskellige events, der sendes til Google Tag Manager.</p>
+
+    <!-- Knap til tracking -->
     <button id="test-knap">Klik mig</button>
 
+    <!-- Udgående link -->
+    <p><a href="https://www.google.com" id="udgaaende-link" target="_blank">Besøg Google</a></p>
+
+    <!-- Formular -->
+    <form id="test-form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <button type="submit">Send</button>
+    </form>
+
+    <!-- Video -->
+    <video id="test-video" width="320" height="240" controls>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        Din browser understøtter ikke video-tagget.
+    </video>
+
     <script>
-        // Knapklik tracking til GTM
+        // Sidevisning (page_view)
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({'event': 'page_view'});
+
+        // Knapklik event
         document.getElementById("test-knap").addEventListener("click", function() {
-            dataLayer.push({'event': 'knapKlik'}); // Sender event til GTM
-            alert("Event sendt til GTM!");
+            dataLayer.push({'event': 'knapKlik'});
+            alert("Knapklik event sendt til GTM!");
+        });
+
+        // Udgående link event
+        document.getElementById("udgaaende-link").addEventListener("click", function() {
+            dataLayer.push({'event': 'udgaaendeKlik', 'link': this.href});
+        });
+
+        // Formular event
+        document.getElementById("test-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Forhindrer at formularen sender data rigtigt
+            dataLayer.push({'event': 'formularSendt', 'email': document.getElementById("email").value});
+            alert("Formular event sendt til GTM!");
+        });
+
+        // Video start event
+        document.getElementById("test-video").addEventListener("play", function() {
+            dataLayer.push({'event': 'videoStart'});
         });
     </script>
 
